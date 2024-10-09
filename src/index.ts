@@ -15,7 +15,7 @@ app.route("/api/matches", MatchRoutes);
 app.route("/api/scores", ScoreRoutes);
 
 const PUBLIC_PATH =
-  process.env.NODE_ENV === "production" ? "./public" : "./web/dist";
+  process.env.NODE_ENV === "production" ? "./build/public" : "./web/dist";
 
 app.get("/_astro/*", serveStatic({ root: PUBLIC_PATH }));
 app.get("*", serveStatic({ path: `${PUBLIC_PATH}/index.html` }));
