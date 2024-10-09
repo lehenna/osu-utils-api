@@ -3,17 +3,21 @@
   "scripts": {
     "dev": "bun run --hot src/index.ts",
     "build": "bun build ./src/index.ts --outdir ./build --target bun --external rosu-pp-js",
-    "start": "bun run build/index.js"
+    "start": "NODE_ENV=production bun run build/index.js",
+    "copy-web": "bun run src/copy-web.ts",
+    "deploy": "bun run src/deploy.ts"
   },
   "dependencies": {
     "axios": "^1.7.7",
     "hono": "^4.6.3",
     "nodesu": "^0.7.3",
     "rosu-pp-js": "^1.1.0",
-    "valibot": "^1.0.0",
+    "valibot": "^0.42.1",
     "validate": "^5.2.0"
   },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "@types/fs-extra": "^11.0.4",
+    "fs-extra": "^11.2.0"
   }
 }

@@ -14,7 +14,10 @@ app.route("/api/beatmapsets", BeatmapsetRoutes);
 app.route("/api/matches", MatchRoutes);
 app.route("/api/scores", ScoreRoutes);
 
-app.get("/_astro/*", serveStatic({ root: "./web/dist" }));
-app.get("*", serveStatic({ path: "./web/dist/index.html" }));
+const PUBLIC_PATH =
+  process.env.NODE_ENV === "production" ? "./public" : "./web/dist";
+
+app.get("/_astro/*", serveStatic({ root: PUBLIC_PATH }));
+app.get("*", serveStatic({ path: `${PUBLIC_PATH}/index.html` }));
 
 export default app;
