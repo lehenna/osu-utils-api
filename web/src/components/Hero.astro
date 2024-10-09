@@ -1,0 +1,19 @@
+---
+import H1 from "./H1.astro";
+import HeroGithubButton from "./HeroGithubButton.astro";
+import HeroDiscordButton from "./HeroDiscordButton.astro";
+import Text from "./Text.astro";
+---
+
+<header class="relative py-20">
+  <H1 class="mb-4">Osu Utils API</H1>
+  <Text>
+    <strong> Osu Utils API </strong>
+    is an open source Public API, created to offer a simple way to obtain information
+    from the official <strong>Osu API</strong> without the need to register.
+  </Text>
+  <div class="mt-4 flex items-center flex-wrap gap-4">
+    <HeroGithubButton />
+    <HeroDiscordButton />
+  </div>
+</header>

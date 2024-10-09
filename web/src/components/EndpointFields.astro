@@ -1,0 +1,36 @@
+---
+import type { EndpointField as EndpointFieldType } from "../lib/endpoints";
+import EndpointField from "./EndpointField.astro";
+
+interface Props {
+  fields: EndpointFieldType[] | EndpointFieldType[][];
+}
+
+const { fields } = Astro.props;
+---
+
+<div class="relative border-collapse border-2 border-zinc-200 rounded-md">
+  <table class="w-full">
+    <thead class="h-8 bg-zinc-100 border-b-2 border-zinc-200 w-full">
+      <tr>
+        <th class="text-sm font-medium uppercase text-left px-2.5"> Name </th>
+        <th class="text-sm font-medium uppercase text-left px-2.5"> Type </th>
+        <th class="text-sm font-medium uppercase text-left px-2.5">
+          Description
+        </th>
+      </tr>
+    </thead>
+    <tbody class="text-sm">
+      {
+        fields.map((field) => {
+          if (Array.isArray(field)) {
+            return field.map((subField) => {
+              return <EndpointField {...subField} />;
+            });
+          }
+          return <EndpointField {...field} />;
+        })
+      }
+    </tbody>
+  </table>
+</div>

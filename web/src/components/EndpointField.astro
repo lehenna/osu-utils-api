@@ -1,0 +1,19 @@
+---
+import type { EndpointField } from "../lib/endpoints";
+
+interface Props extends EndpointField {}
+
+const { description, name, type } = Astro.props;
+---
+
+<tr class="h-10">
+  <td class="px-2.5">{name}</td>
+  <td class="px-2.5"
+    ><span
+      class="bg-zinc-200 rounded px-2 h-6 w-min whitespace-nowrap grid place-items-center text-sm"
+    >
+      {type}</span
+    ></td
+  >
+  <td class="px-2.5">{description}</td>
+</tr>

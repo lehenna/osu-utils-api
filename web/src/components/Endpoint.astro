@@ -1,0 +1,68 @@
+---
+import type { Endpoint } from "../lib/endpoints";
+import { API_URI } from "../lib/consts";
+import { EndpointMethod } from "../lib/endpoints";
+import H4 from "./H4.astro";
+import EndpointFields from "./EndpointFields.astro";
+import { cn } from "../lib/cn";
+import { EndpointResponseTable } from "./EndpointResponse";
+
+interface Props extends Endpoint {}
+
+const { method, description, pathname, body, query, response } = Astro.props;
+---
+
+<article class="relative flex flex-col gap-4 py-4">
+  <h3
+    class="relative flex items-center gap-2 border-2 border-zinc-200 bg-zinc-100 rounded-md px-2.5 h-10"
+  >
+    <span
+      class={cn(
+        "h-6 text-sm font-medium px-2 grid place-items-center text-white rounded",
+        method === EndpointMethod.Get
+          ? "bg-green-500"
+          : method === EndpointMethod.Post
+            ? "bg-blue-500"
+            : method === EndpointMethod.Patch
+              ? "bg-amber-500"
+              : method === EndpointMethod.Delete
+                ? "bg-red-500"
+                : "bg-cyan-500"
+      )}>{method}</span
+    >
+    <span class="text-sm">
+      {API_URI}{pathname}
+    </span>
+  </h3>
+  <p>{description}</p>
+  {
+    query ? (
+      <section>
+        <H4 class="mb-2">Query Params</H4>
+        <EndpointFields fields={query} />
+      </section>
+    ) : null
+  }
+  {
+    body ? (
+      <section>
+        <H4 class="mb-2">Body</H4>
+        <EndpointFields fields={body} />
+      </section>
+    ) : null
+  }
+  <H4 class="-mb-2">Response</H4>
+  <EndpointResponseTable
+    client:only="react"
+    response={[
+      ...response,
+      {
+        status: 500,
+        data: {
+          code: "INTERNAL_ERROR",
+          message: "Internal error",
+        },
+      },
+    ]}
+  />
+</article>
