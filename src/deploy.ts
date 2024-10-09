@@ -6,6 +6,10 @@ async function main() {
     cmd: ["bun", "run", "build"],
   });
   spawn({
+    cmd: ["bun", "install"],
+    cwd: join(process.cwd(), "web"),
+  });
+  spawn({
     cmd: ["bun", "run", "build"],
     cwd: join(process.cwd(), "web"),
   });
